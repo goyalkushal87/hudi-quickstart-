@@ -1,0 +1,25 @@
+services:
+  spark-hudi:
+    image: apache/spark:3.5.1-python3
+    container_name: spark-hudi
+    user: root
+    environment:
+      - SPARK_VERSION=3.5
+      - HUDI_VERSION=1.2.0
+      - SCALA_VERSION=2.12
+      # spark-submit isn't on PATH by default in this image -- fix it here
+      # instead of typing the full /opt/spark/bin/ path every time.
+      - PATH=/opt/spark/bin:/opt/spark/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    volumes:
+      - ./notebooks:/home/hudi/notebooks
+      - ../iceberg-quickstart/notebooks/data:/home/hudi/notebooks/data:ro
+      - ivy_cache:/root/.ivy2
+    working_dir: /home/hudi/notebooks
+    # Keeps the container alive so we can `docker exec` into it for every
+    # phase script, EMR-Step-style -- same pattern used in iceberg-quickstart.
+    command: ["tail", "-f", "/dev/null"]
+    ports:
+      - "4040:4040"
+
+volumes:
+  ivy_cache:

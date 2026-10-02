@@ -1,0 +1,272 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 11 0 R /MediaBox [ 0 0 612 792 ] /Parent 10 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 12 0 R /MediaBox [ 0 0 612 792 ] /Parent 10 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 13 0 R /MediaBox [ 0 0 612 792 ] /Parent 10 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/PageMode /UseNone /Pages 10 0 R /Type /Catalog
+>>
+endobj
+9 0 obj
+<<
+/Author (\(anonymous\)) /CreationDate (D:20260927173743+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260927173743+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (Apache Hudi - Table Services, Incremental Queries & Streaming) /Trapped /False
+>>
+endobj
+10 0 obj
+<<
+/Count 3 /Kids [ 5 0 R 6 0 R 7 0 R ] /Type /Pages
+>>
+endobj
+11 0 obj
+<<
+/Length 4784
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 688 cm
+q
+BT 1 0 0 1 0 26 Tm 13.413 0 Td 22 TL /F2 18 Tf 0 0 0 rg (Apache Hudi \227 Table Services, Incremental Queries &) Tj T* 188.577 0 Td (Streaming) Tj T* -201.99 0 Td ET
+Q
+Q
+q
+1 0 0 1 60 670 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf .501961 .501961 .501961 rg (Hands-on interview Q) Tj (&) Tj (A \(companion to Databricks Interview Question Worksheet, Days 1-3\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 624 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q1. What does Compaction do in a Merge-on-Read \(MoR\) Hudi table, and how do you) Tj T* (trigger it?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 578 cm
+q
+BT 1 0 0 1 0 32 Tm 14 TL /F1 10 Tf 0 0 0 rg (Compaction merges a file group's base file with its accumulated delta log file\(s\) into a NEW file slice within the) Tj T* (SAME file group \(same fileId, new base instant time\) \227 it only applies to MoR tables. Triggered via ) Tj /F2 10 Tf (CALL) Tj T* (run_compaction\(op =) Tj (> 'run', path =) Tj (> ') Tj (<) Tj (table_path) Tj (>) Tj ('\)) Tj /F1 10 Tf ( \(Spark SQL procedure; op can be run or schedule\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 536 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q2. Why does Time Travel \(as.of.instant\) still work across a Compaction or Clustering) Tj T* (boundary, even though those operations rewrite files?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 462 cm
+q
+BT 1 0 0 1 0 60 Tm 14 TL /F1 10 Tf 0 0 0 rg (Hudi doesn't delete old file slices immediately after compaction or clustering \227 they're retained until the) Tj T* (Cleaner service physically removes them per the table's retention policy \(e.g. KEEP_LATEST_COMMITS\).) Tj T* (Time travel resolves "which file slice/file group was valid AS OF the given instant," so as long as the old slice is) Tj T* (still on disk \(within the Cleaner's retention window\), an old as.of.instant query can still see the) Tj T* (pre-compaction/pre-clustering state. This window is finite, not permanent.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 420 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q3. What's the difference between Hudi's insert, upsert, bulk_insert, and delete write) Tj T* (operations?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 332 cm
+q
+BT 1 0 0 1 0 74 Tm 14 TL /F1 10 Tf 0 0 0 rg (upsert \(default\) does an index lookup and merges into existing records if the key exists, else inserts. insert) Tj T* (skips the index lookup entirely for speed \227 it can silently create duplicate keys if the key already exists.) Tj T* (bulk_insert is an optimized initial-load path for large one-time loads, and also skips dedup by default. delete) Tj T* (physically removes rows matching the given recordkey + partitionpath. Related config:) Tj T* (hoodie.combine.before.insert \(default false\) controls INTRA-BATCH dedup for insert/bulk_insert only \227 distinct) Tj T* (from hoodie.datasource.write.insert.drop.duplicates, which checks against EXISTING table data.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 290 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q4. If duplicate keys already exist in a Hudi table \(a broken invariant\), and you run an) Tj T* (upsert, which copy gets updated?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 230 cm
+q
+BT 1 0 0 1 0 46 Tm 14 TL /F1 10 Tf 0 0 0 rg (Not a documented, guaranteed contract \227 it depends on Hudi's internal Bloom Index file-processing order, an) Tj T* (implementation detail that can change between versions. Practical lesson: never rely on upsert to self-heal) Tj T* (existing duplicates. Run an explicit dedup job first; don't treat upsert as a fix for a pre-existing data-quality) Tj T* (violation.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 202 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 2 Tm /F3 12 Tf 14 TL (Q5. What's the real difference between Clustering and Compaction in Hudi?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 100 cm
+q
+BT 1 0 0 1 0 88 Tm -0.007692 Tw 14 TL /F1 10 Tf 0 0 0 rg (Compaction is CORRECTNESS-driven, MoR-only, and merges base+log into the SAME file group \(same fileId\)) Tj T* 0 Tw (\227 like updating a sticky-note change permanently into the same diary page. Clustering is) Tj T* (PERFORMANCE-driven \(bin-packing small files + sorting\), works on BOTH CoW and MoR, and creates) Tj T* (entirely NEW file groups \(new fileIds\), marking the old ones as "replaced" via a distinct timeline action) Tj T* (\(REPLACE, tracked as HoodieReplaceCommitMetadata\) \227 like combining 5 separate small diaries into one) Tj T* (brand-new sorted diary, while old diaries are retired \(not deleted\) until the Cleaner runs. Triggered via ) Tj /F2 10 Tf (CALL) Tj T* (run_clustering\(path =) Tj (> ') Tj (<) Tj (path) Tj (>) Tj (', order =) Tj (> ') Tj (<) Tj (col) Tj (>) Tj (', order_strategy =) Tj (> 'linear'|'z-order'|'hilbert'\)) Tj /F1 10 Tf (.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+12 0 obj
+<<
+/Length 5182
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 704 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q6. Why can a plain Incremental Query on a Copy-on-Write Hudi table return "false) Tj T* (positive" changed records, and how do you fix it in production?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 574 cm
+q
+BT 1 0 0 1 0 116 Tm 14 TL /F1 10 Tf 0 0 0 rg (CoW's automatic small-file packing means an unrelated, untouched record can end up sharing a rewritten file) Tj T* (group with a record that actually changed \227 the incremental query then reports the whole rewritten file's) Tj T* -0.045556 Tw (records as "changed." This is architecturally inherent when small-file packing is correctly left on \(as it must be in) Tj T* 0 Tw (production; disabling it via hoodie.parquet.small.file.limit=0 causes a small-file explosion instead\). Three) Tj T* (layered production solutions, increasing precision/cost: \(1\) make the downstream consumer idempotent) Tj T* (\(MERGE/upsert instead of blind INSERT\) \227 cheap baseline; \(2\) use MERGE_ON_READ, where delta log files) Tj T* (contain only the actually-changed records, reducing false positives; \(3\) use Hudi's dedicated CDC feature) Tj T* (\(hoodie.table.cdc.enabled=true\), which materializes exact before/after row-level change events at write time,) Tj T* (eliminating false positives entirely.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 532 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q7. If idempotent processing \(Step 1 above\) is required anyway, why bother with an) Tj T* ("incremental" framework at all?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 444 cm
+q
+BT 1 0 0 1 0 74 Tm 14 TL /F1 10 Tf 0 0 0 rg (Idempotency and efficiency solve different problems. Idempotency makes it SAFE to reprocess an imperfect) Tj T* (candidate set. The "incremental" framework's real value is SCALE/EFFICIENCY \227 scanning a small candidate) Tj T* (set of recently-changed files instead of the entire table on every run. Same pattern as "at-least-once delivery +) Tj T* (idempotent consumer = effectively-once processing" \(Kafka consumers, CDC pipelines\): the delivery) Tj T* (mechanism doesn't need to be perfectly precise as long as the consumer is idempotent and the mechanism is) Tj T* (efficient.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 388 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 30 Tm /F3 12 Tf 14 TL (Q8. How does Hudi's Structured Streaming SOURCE \(readStream.format\("hudi"\)\)) Tj T* (track progress between micro-batches, and what happens if you need a full reload) Tj T* (from the beginning?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 202 cm
+q
+BT 1 0 0 1 0 172 Tm 14 TL /F1 10 Tf 0 0 0 rg (HoodieStreamSource plugs into Spark's standard Structured Streaming checkpoint directory \(offsets/, commits/) Tj T* (subfolders, one file per batch\). What it stores as the "offset" is a HoodieSourceOffset \227 literally a Hudi) Tj T* (commit/instant-time string, JSON-serialized \227 not a byte position like Kafka. Each trigger, Spark reads the last) Tj T* (stored offset and Hudi's source converts it internally into hoodie.datasource.read.begin.instanttime for an) Tj T* (incremental query, with the latest commit as the end. For a full reload: delete/clear the checkpointLocation and) Tj T* (restart \227 with no checkpoint, Hudi falls back to an internal INIT_OFFSET \("00000000000000", older than any) Tj T* (real commit\), so the first micro-batch reads the whole table. Two safety nets: \(a\) Hudi's Cleaner NEVER) Tj T* (removes the latest/current version of any record, so a full snapshot read is always complete regardless of) Tj T* (retention aggressiveness; \(b\) if the incremental query's begin-instant is older than what remains on the active) Tj T* (timeline \(already moved to the archived timeline by Hudi's separate Timeline Archival service \227) Tj T* (hoodie.keep.min.commits/hoodie.keep.max.commits, a distinct mechanism from Cleaning\), the config) Tj T* (hoodie.datasource.read.incr.fallback.fulltablescan.enable \(default true\) makes Hudi silently fall back to a full) Tj T* (table scan instead of erroring or silently missing data.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 160 cm
+q
+BT 1 0 0 1 0 16 Tm 14 TL /F3 12 Tf .101961 .301961 .560784 rg (Q9. Hudi's dedicated CDC feature vs. a plain incremental query \227 what's the actual) Tj T* (difference, and what config enables it?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 72 cm
+q
+BT 1 0 0 1 0 74 Tm 14 TL /F1 10 Tf 0 0 0 rg (A plain incremental query says "these files changed, go read the current state yourself" \227 on CoW tables with) Tj T* (small-file packing this can include false positives \(Q6\). Hudi's CDC feature is fundamentally different: it) Tj T* (materializes the EXACT change event at write time. Enabled via ) Tj /F2 10 Tf (hoodie.table.cdc.enabled = true) Tj /F1 10 Tf ( \(default) Tj T* (false, set only at table-creation time\) plus ) Tj /F2 10 Tf (hoodie.table.cdc.supplemental.logging.mode) Tj /F1 10 Tf ( \(OP_KEY_ONLY /) Tj T* (DATA_BEFORE / DATA_BEFORE_AFTER, default DATA_BEFORE_AFTER\). Read it via) Tj T* /F2 10 Tf (hoodie.datasource.query.type=incremental) Tj /F1 10 Tf ( + ) Tj /F2 10 Tf (hoodie.datasource.query.incremental.format=cdc) Tj /F1 10 Tf (. The) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+13 0 obj
+<<
+/Length 1589
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 676 cm
+q
+BT 1 0 0 1 0 46 Tm 14 TL /F1 10 Tf 0 0 0 rg (output has exactly 4 columns: ) Tj /F2 10 Tf (op) Tj /F1 10 Tf ( \(i/u/d\), ) Tj /F2 10 Tf (ts_ms) Tj /F1 10 Tf (, ) Tj /F2 10 Tf (before) Tj /F1 10 Tf (, ) Tj /F2 10 Tf (after) Tj /F1 10 Tf ( \227 a full before-image and after-image of the row) Tj T* (\(in DATA_BEFORE_AFTER mode\), not just "this file changed." Verified hands-on: an update showed) Tj T* (before\(amount=100\) / after\(amount=150\); a delete showed a real before-image with after=null; an insert) Tj T* (showed before=null with a full after-image. Works on both COW and MOR, minimum Hudi version 0.13.0.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 634 cm
+q
+.101961 .301961 .560784 rg
+BT 1 0 0 1 0 16 Tm /F3 12 Tf 14 TL (Q10. If the CDC output's `after` column already has the full new row, why do you need) Tj T* (the `before` image at all?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 546 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F1 10 Tf 14 TL (Because looking only at `after` tells you the new state, not what actually changed. Seeing after.amount=150) Tj T* (alone doesn't tell you whether it moved from 100 or from 149, or whether the row is brand new. The) Tj T* (before-image matters for audit/compliance trails \("what changed, by how much"\), for downstream) Tj T* (conflict-detection when replaying changes into another system, and for anything computing a delta rather than) Tj T* (just a snapshot. This is exactly why Hudi's DEFAULT supplemental logging mode is the full) Tj T* (DATA_BEFORE_AFTER, not the minimal OP_KEY_ONLY.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000061 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000331 00000 n 
+0000000450 00000 n 
+0000000645 00000 n 
+0000000840 00000 n 
+0000001035 00000 n 
+0000001104 00000 n 
+0000001432 00000 n 
+0000001504 00000 n 
+0000006340 00000 n 
+0000011574 00000 n 
+trailer
+<<
+/ID 
+[<1abcabe3d66d67cc1ab5049785e9146d><1abcabe3d66d67cc1ab5049785e9146d>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 9 0 R
+/Root 8 0 R
+/Size 14
+>>
+startxref
+13215
+%%EOF

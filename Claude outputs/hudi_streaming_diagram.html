@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hudi Streaming: Sink + Source</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; background: #0f1115; color: #e6e6e6; padding: 24px; }
+  h2 { color: #7dd3fc; }
+  .mermaid { background: #161a20; border-radius: 12px; padding: 16px; }
+  p.note { color: #a3a3a3; font-size: 14px; }
+</style>
+</head>
+<body>
+  <h2>Phase 6 -- Hudi Streaming Sink + Source</h2>
+  <p class="note">Part A (top): fake "rate" data streams into the Hudi table, one commit per micro-batch. Part B (bottom): the same table is read back as a stream -- Spark's checkpoint remembers the last commit it saw, and pulls only new commits each time, using the exact incremental-query mechanics from the previous phase.</p>
+
+  <div class="mermaid">
+flowchart TB
+    subgraph A["PART A -- Streaming SINK"]
+      direction LR
+      R["Rate Source<br/>(fake stream, free)"] --> B1["Micro-batch 1<br/>(0-5s)"] --> B2["Micro-batch 2<br/>(5-10s)"] --> B3["Micro-batch 3<br/>(10-15s)"] --> B4["Micro-batch 4<br/>(15-20s)"]
+    end
+
+    B1 -. writes .-> C1[("Commit C1")]
+    B2 -. writes .-> C2[("Commit C2")]
+    B3 -. writes .-> C3[("Commit C3")]
+    B4 -. writes .-> C4[("Commit C4")]
+
+    subgraph T["Hudi Table Timeline"]
+      direction LR
+      C1 --> C2 --> C3 --> C4
+    end
+
+    subgraph Bpart["PART B -- Streaming SOURCE"]
+      direction LR
+      CP["Spark Checkpoint<br/>'I already saw up to C2'"] --> INCR["Incremental query<br/>begin = C2 (auto)"]
+      INCR --> OUT["Console output<br/>ONLY C3, C4's new rows"]
+    end
+
+    C2 -.->|remembered| CP
+    C3 -->|new!| INCR
+    C4 -->|new!| INCR
+
+    style A fill:#1e2430,stroke:#7dd3fc,color:#e6e6e6
+    style Bpart fill:#1e2430,stroke:#86efac,color:#e6e6e6
+    style T fill:#161a20,stroke:#666,color:#e6e6e6
+    style C1 fill:#334155,color:#fff
+    style C2 fill:#334155,color:#fff
+    style C3 fill:#166534,color:#fff
+    style C4 fill:#166534,color:#fff
+  </div>
+
+  <p class="note">Green commits (C3, C4) = "naye" commits jo Part B ne pichli baar ke baad dekhe. Grey commits (C1, C2) = pehle hi process ho chuke, checkpoint ki wajah se dobara nahi padhe jaate.</p>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+</script>
+</body>
+</html>
